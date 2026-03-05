@@ -2,11 +2,8 @@ import { useEffect, useState } from "react";
 import { supabase } from "./supabaseClient";
 
 function App() {
-  const [users, setUsers] = useState([]);
 
-  useEffect(() => {
-    fetchUsers();
-  }, []);
+  const [users, setUsers] = useState([]);
 
   async function fetchUsers() {
     const { data, error } = await supabase
@@ -20,14 +17,20 @@ function App() {
     }
   }
 
+  useEffect(() => {
+    fetchUsers();
+  }, []);
+
   return (
     <div>
       <h1>Users</h1>
+
       {users.map((user) => (
         <p key={user.id}>
-          {user.name} - {user.age}
-        </p>
+  {user.name} - {user.age || "No age"}
+</p>
       ))}
+
     </div>
   );
 }
